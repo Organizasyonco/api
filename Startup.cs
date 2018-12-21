@@ -1,17 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using api.Middleware;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpOverrides;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
-using api.Middleware;
 namespace api
 {
     public class Startup
@@ -45,6 +38,21 @@ namespace api
                 app.UseHsts();
             }
 
+            
+            
+            //Varsayılan default.htm, default.html, index.htm, index.html
+            app.UseDefaultFiles();
+            //DefaultFilesOptions options = new DefaultFilesOptions();
+            //options.DefaultFileNames.Clear();
+            //options.DefaultFileNames.Add("organizasyonco");
+            //app.UseDefaultFiles(options);
+
+            app.UseStaticFiles();
+
+            //UseStaticFiles ve UseDefaultFiles etkinleştirir
+            //app.UseFileServer();
+            //UseStaticFiles ve UseDefaultFiles ve UseDirectoryBrowser etkinleştirir
+            //app.UseFileServer(enableDirectoryBrowsing: true);
             app.UseForwardedHeaders(new ForwardedHeadersOptions
             {
                 ForwardedHeaders = ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto
